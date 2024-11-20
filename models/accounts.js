@@ -34,6 +34,22 @@ const createAnnouncement = async (announcementData) => {
     const result = await pool.query(query, values);
     return result.rows[0];
 };
+const createSubscription = async (subscriptionData) => {
+  const { product_name, account_id } = subscriptionData; 
+  const createdAt = new Date(); 
+  const updatedAt = new Date(); 
+
+  const query = `
+      INSERT INTO magplus_subscriptions (product_name, account_id, created_at, updated_at)
+      VALUES ($1, $2, $3, $4) RETURNING *;
+  `;
+  
+  const values = [product_name, account_id, createdAt, updatedAt];
+  const result = await pool.query(query, values);
+  return result.rows[0];
+};
+
+module.exports = { createAccount, createAnnouncement, createSubscription };
 
 // Function to insert data into key_account_managers table
 // const createKeyAccountManager = async (managerData) => {
@@ -49,4 +65,4 @@ const createAnnouncement = async (announcementData) => {
 //     return result.rows[0];
 // };
 
-module.exports = { createAccount, createAnnouncement };
+// module.exports = { createAccount, createAnnouncement };

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-const pool = require('../db'); 
+const pool = require('../config/db'); 
 const bcrypt = require('bcrypt');
 const JWT_SECRET = 'your_secret_key';
 
